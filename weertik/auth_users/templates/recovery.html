@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if error %}
+        <p class="error">La cuenta {{ email }} no se encuentra registrada</p>
+    {% endif %}
+
+    {% if send %}
+        <p class="info">Se ha enviado un mail a la cuenta {{ email }}.</p>
+    {% else %}
+        <form action="" method="post">
+            <label for="email">Email:</label>
+            <input type="text" name="email" value="" id="email">
+
+            <input type="submit" value="recovery" />
+            <input type="hidden" name="next" value="{{ next|escape }}" />
+            {% csrf_token %}
+        </form>
+    {% endif %}
+
+{% endblock %}

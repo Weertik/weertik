@@ -1,0 +1,8 @@
+Hola {{ username }},
+Se ha solicitado un cambio de contraseña.
+pulsa en este link para cambiarla
+http://weertik.com/auth/change/{{ token }}
+
+Si usted no ha solicitado el cambio de contraseña omita este correo.
+
+Atentamente el equipo de Weertik

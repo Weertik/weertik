@@ -10,14 +10,16 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+from auth_users.settings import *
 
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+WEERTIK_TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "templates")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'NaNaNaNa BATMAN!!'
+SECRET_KEY = 'NaNaNaNa BATMAN'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -25,6 +27,13 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+EMAIL_HOST = 'smtp.server.com'
+EMAIL_HOST_USER = 'user@server.com'
+EMAIL_HOST_PASSWORD = 'NaNaNaNa BATMAN'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 # Application definition
@@ -36,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'kronos',
     'auth_users',
 )
 
@@ -77,9 +87,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+TEMPLATE_DIRS = (
+    WEERTIK_TEMPLATE_DIR,
+    AUTH_USERS_TEMPLATE_DIR,
+)

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if e_pass %}
+        <p class="error">La nueva contraseña no coincide</p>
+    {% endif %}
+
+    {% if send %}
+        <p class="info">La contraseña a sido modificada.</p>
+    {% elif e_token %}
+        <p class="error">La url no se encuentra disponible.</p>
+    {% else %}
+        <p>Hola, {{user.username}}</p>
+        <form action="" method="post">
+            <label for="password">Nueva contraseña:</label>
+            <input type="password" name="password" value="" id="password">
+            <label for="password_repeat">Repita la nueva contraseña:</label>
+            <input type="password" name="password_repeat" value="" id="password_repeat">
+
+            <input type="submit" value="change" />
+            <input type="hidden" name="next" value="{{ next|escape }}" />
+            {% csrf_token %}
+        </form>
+    {% endif %}
+
+{% endblock %}
