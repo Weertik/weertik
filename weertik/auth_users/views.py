@@ -8,6 +8,8 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 import uuid
 from .models import *
+from .forms import *
+from django.contrib.auth.models import Group
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
@@ -111,12 +113,77 @@ def change(request, token):
 
 def register(request):
     if request.method != 'POST':
-        return render(request, 'register.html')
-    username = request.POST.get('username', '')
-    password = request.POST.get('password', '1')
-    password_repeat = request.POST.get('password_repeat', '2')
-    email = request.POST.get('email', '')
-    # CONTINUAR....
+        return render_to_response('register.html',
+                                  {'form': SignupForm()},
+                                  context_instance=RequestContext(request))
+
+    form = SignupForm(request.POST)
+    if form.is_valid():
+        exist = False
+        send = False
+        try:
+            user = User.objects.create_user(
+                first_name=form.data['first_name'],
+                last_name=form.data['last_name'],
+                password=form.data['password'],
+                username=form.data['email'],
+                email=form.data['email'])
+        except Exception, e:
+            user = User.objects.get(email=form.data['email'])
+            exist = True
+
+        if not exist:
+            user.is_active = False
+            user.save()
+            group = Group.objects.get(name='Free')
+            group.user_set.add(user)
+
+        try:
+            token_user = Token_auth.objects.get(user=user)
+        except Token_auth.DoesNotExist:
+            token_user = Token_auth()
+            token_user.user = user
+            token_user.token = uuid.uuid4().hex
+            token_user.save()
+
+        if not user.is_active:
+            context = Context({'username': user.username,
+                               'token': token_user.token})
+            _send_email('register_email',
+                        context, [user.email],
+                        'Weertik - Activa tu cuenta')
+            send = True
+
+        return render_to_response('register.html',
+                                  {'send': send,
+                                   'exist': exist,
+                                   'email': user.email,
+                                   'form': form},
+                                  context_instance=RequestContext(request))
+
+    return render_to_response('register.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
+
+
+def active(request, token):
+    try:
+        token_user = Token_auth.objects.get(token=token)
+        user = token_user.user
+    except Token_auth.DoesNotExist:
+        return render_to_response('active.html',
+                                  {'e_token': True},
+                                  context_instance=RequestContext(request))
+
+    user.is_active = True
+    user.save()
+    token_user.delete()
+    context = Context({'username': user.username})
+    _send_email('active_email', context,
+                [user.email], 'Weertik - Cuenta activada')
+    return render_to_response('active.html',
+                              {'send': True},
+                              context_instance=RequestContext(request))
 
 
 def panel(request):

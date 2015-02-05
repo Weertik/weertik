@@ -1,0 +1,4 @@
+Hola {{ username }},
+Su cuenta a sido activada satisfactoriamente.
+
+Atentamente el equipo de Weertik

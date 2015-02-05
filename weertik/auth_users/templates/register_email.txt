@@ -1,0 +1,7 @@
+Hola {{ username }},
+Bienvenido a Weertik,
+Activa tu cuenta de email pulsando en el siguiente enlace
+
+http://weertik.com/auth/active/{{ token }}
+
+Atentamente el equipo de Weertik

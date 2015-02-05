@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if form.errors %}
+        <p class="error">Complete los campos erroneos</p>
+    {% endif %}
+    {% if exist %}
+        <p class="error">Existe una cuenta con el mismo email registrada</p>
+    {% endif %}
+
+    {% if send %}
+        <p class="info">Se ha enviado un mail de confirmación a la cuenta {{ email }}.</p>
+    {% else %}
+        <form action="" method="post">
+            {% for field in form %}
+                <p>{{field.errors}}
+                {{field.label}} {{field}}</p>
+            {% endfor %}
+
+            <input type="submit" value="recovery" />
+            <input type="hidden" name="next" value="{{ next|escape }}" />
+            {% csrf_token %}
+        </form>
+    {% endif %}
+
+{% endblock %}

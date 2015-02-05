@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if send %}
+        <p class="info">La cuenta a sido activada.</p>
+    {% elif e_token %}
+        <p class="error">La url no se encuentra disponible.</p>
+    {% endif %}
+
+{% endblock %}
