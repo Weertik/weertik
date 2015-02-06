@@ -185,6 +185,12 @@ def active(request, token):
                               {'send': True},
                               context_instance=RequestContext(request))
 
+
+def delete(request):
+    # NOT IMPLEMENT
+    return
+
+
 # DELETE THIS
 def panel(request):
     auth.logout(request)
