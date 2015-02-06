@@ -1,18 +1,15 @@
 /* 1 - Import Google Font
 ---------------------------------------------------------------------- */
-/*@import url(http://fonts.googleapis.com/css?family=Oxygen);
-@import url(http://fonts.googleapis.com/css?family=Roboto);*/
+/*@import url(http://fonts.googleapis.com/css?family=Mallanna);*/
 
 /* 1 - Import Google Font End
 ---------------------------------------------------------------------- */
 
 
-
-
 /* 2 - Global Style
 ---------------------------------------------------------------------- */
 body{
-	font-family:'Roboto', sans-serif;
+	font-family:'PT Sans', sans-serif;
 	color:#fff;
 	-webkit-font-smoothing:antialiased;
 	-moz-osx-font-smoothing:grayscale;
@@ -425,7 +422,7 @@ a:focus{
 .site-title{
 	text-align:center;
 	font-size:66px;
-	font-family: 'Oxygen', sans-serif;
+	font-family: 'Mallanna', sans-serif;
 	margin:0 0 50px 0;
 	padding-bottom:50px;
 	position:relative;
