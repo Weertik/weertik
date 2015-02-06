@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if not friends %}
+        <p class="error">Sorry, you don'1 have friends :p</p>
+    {% endif %}
+    {% for friend in friends %}
+        {{ friend.from_user.username  }} </br>
+    {% endfor %}
+
+{% endblock %}

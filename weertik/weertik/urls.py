@@ -3,6 +3,7 @@ from django.contrib import admin
 from auth_users import urls as auth_users_urls
 from auth_users import views as auth_users_views
 from panel import urls as panel_urls
+from friends import urls as friends_urls
 
 
 urlpatterns = patterns(
@@ -15,4 +16,5 @@ urlpatterns = patterns(
     url(r'^$', auth_users_views.login),  # Only for login
     url(r'^auth/', include(auth_users_urls)),  # Other urls
     url(r'^panel/', include(panel_urls)),
+    url(r'^friends/', include(friends_urls)),
 )
