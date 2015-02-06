@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 from auth_users.settings import *
 from panel.settings import *
+from friends.settings import *
+# from chat.settings import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 WEERTIK_TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "templates")
@@ -30,9 +32,9 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 
-EMAIL_HOST = 'smtp.server.com'
-EMAIL_HOST_USER = 'user@server.com'
-EMAIL_HOST_PASSWORD = 'NaNaNaNa BATMAN'
+EMAIL_HOST = 'smtp.mandrillapp.com'
+EMAIL_HOST_USER = 'endika2@gmail.com'
+EMAIL_HOST_PASSWORD = 'u8cr4PJW5FoJTkvkxb0fAg'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -48,6 +50,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'kronos',
     'auth_users',
+    'friends',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -97,4 +100,5 @@ TEMPLATE_DIRS = (
     WEERTIK_TEMPLATE_DIR,
     AUTH_USERS_TEMPLATE_DIR,
     PANEL_TEMPLATE_DIR,
+    FRIENDS_TEMPLATE_DIR,
 )
