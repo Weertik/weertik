@@ -111,9 +111,9 @@ def change(request, token):
                               context_instance=RequestContext(request))
 
 
-def register(request):
+def signup(request):
     if request.method != 'POST':
-        return render_to_response('register.html',
+        return render_to_response('signup.html',
                                   {'form': SignupForm()},
                                   context_instance=RequestContext(request))
 
@@ -149,19 +149,19 @@ def register(request):
         if not user.is_active:
             context = Context({'username': user.username,
                                'token': token_user.token})
-            _send_email('register_email',
+            _send_email('signup_email',
                         context, [user.email],
                         'Weertik - Activa tu cuenta')
             send = True
 
-        return render_to_response('register.html',
+        return render_to_response('signup.html',
                                   {'send': send,
                                    'exist': exist,
                                    'email': user.email,
                                    'form': form},
                                   context_instance=RequestContext(request))
 
-    return render_to_response('register.html',
+    return render_to_response('signup.html',
                               {'form': form},
                               context_instance=RequestContext(request))
 
@@ -185,7 +185,7 @@ def active(request, token):
                               {'send': True},
                               context_instance=RequestContext(request))
 
-
+# DELETE THIS
 def panel(request):
     auth.logout(request)
     return render(request, 'panel.html')

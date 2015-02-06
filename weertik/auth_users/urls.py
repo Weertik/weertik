@@ -11,8 +11,7 @@ urlpatterns = patterns(
     url(r'^$', views.login, name='login'),
     url(r'^logout', views.logout, name='logout'),
     url(r'^recovery', views.recovery, name='recovery'),
-    url(r'^register', views.register, name='register'),
+    url(r'^signup', views.signup, name='signup'),
     url(r'^active/(?P<token>.*)$', views.active, name='active'),
     url(r'^change/(?P<token>.*)$', views.change, name='change'),
-    url(r'^panel', views.panel, name='panel'),
 )
