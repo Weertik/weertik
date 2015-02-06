@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from auth_users import urls as auth_users_urls
 from auth_users import views as auth_users_views
+from panel import urls as panel_urls
 
 
 urlpatterns = patterns(
@@ -13,6 +14,5 @@ urlpatterns = patterns(
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', auth_users_views.login),  # Only for login
     url(r'^auth/', include(auth_users_urls)),  # Other urls
-
-    url(r'^panel', auth_users_views.panel, name='panel'),
+    url(r'^panel/', include(panel_urls)),
 )

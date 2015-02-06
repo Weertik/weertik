@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from auth_users.settings import *
+from panel.settings import *
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 WEERTIK_TEMPLATE_DIR = os.path.join(os.path.dirname(__file__), "templates")
@@ -95,4 +96,5 @@ MEDIA_URL = '/media/'
 TEMPLATE_DIRS = (
     WEERTIK_TEMPLATE_DIR,
     AUTH_USERS_TEMPLATE_DIR,
+    PANEL_TEMPLATE_DIR,
 )

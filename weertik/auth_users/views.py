@@ -189,9 +189,3 @@ def active(request, token):
 def delete(request):
     # NOT IMPLEMENT
     return
-
-
-# DELETE THIS
-def panel(request):
-    auth.logout(request)
-    return render(request, 'panel.html')
