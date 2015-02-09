@@ -31,7 +31,9 @@ def login(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect(reverse('panel'))
     if request.method != 'POST':
-        return render(request, 'login.html')
+        return render_to_response('login.html',
+                                  {'form': SignupForm()},
+                                  context_instance=RequestContext(request))
 
     user = auth.authenticate(username=request.POST.get('username', ''),
                              password=request.POST.get('password', ''))
@@ -41,7 +43,8 @@ def login(request):
     else:
         error = 'username and password not is correct'
         return render_to_response('login.html',
-                                  {'error': error},
+                                  {'error': error,
+                                   'form': SignupForm()},
                                   context_instance=RequestContext(request))
 
 

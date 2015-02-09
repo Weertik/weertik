@@ -1,0 +1,26 @@
+body{
+    font-family:'PT Sans', sans-serif;
+    padding-top: 50px;
+    overflow-x: hidden;
+}
+.pattern{
+	background:rgba(0,0,0,.5) url(../img/pattern.png);
+	padding-top:100px;
+}
+.logo{
+    font-family:'Mallanna', sans-serif;
+    font-size: 25px;
+    color: #6AD938 !important;
+}
+.navbar-default{background-color: #fff;}
+.box_white{background-color:#fff;
+           border-radius: 4px 4px 4px 4px;
+           -moz-border-radius: 4px 4px 4px 4px;
+           -webkit-border-radius: 4px 4px 4px 4px;
+           border: 0px solid #ffffff;
+           padding: 5px;
+           margin-bottom: 25px;
+}
+.white{color: #fff;}
+.center{text-align: center;}
+.cut-input{float: left;width: 20%;margin-right: 5px;}

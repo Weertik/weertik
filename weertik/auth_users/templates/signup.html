@@ -1,27 +1,29 @@
-{% extends "base.html" %}
-
+{% extends "base_auth_users.html" %}
+{% block title %}Registrarse{% endblock %}
 {% block content %}
 
-    {% if form.errors %}
-        <p class="error">Complete los campos erroneos</p>
-    {% endif %}
-    {% if exist %}
-        <p class="error">Existe una cuenta con el mismo email registrada</p>
-    {% endif %}
-
     {% if send %}
-        <p class="info">Se ha enviado un mail de confirmación a la cuenta {{ email }}.</p>
+        <p><div class="alert alert-success" role="alert">Se ha enviado un mail de confirmación a la cuenta {{ email }}.</div></p>
     {% else %}
         <form action="" method="post">
             {% for field in form %}
-                <p>{{field.errors}}
-                {{field.label}} {{field}}</p>
+                <p>
+                {% if field.errors %}
+                <div class="alert alert-danger" role="alert">{{field.errors}}</div>
+                {% endif %}
+                <label>{{field.label}}</label> {{field}}</p>
             {% endfor %}
 
-            <input type="submit" value="Signup" />
+            <input type="submit" value="Registrate" class="btn btn-info" />
             <input type="hidden" name="next" value="{{ next|escape }}" />
             {% csrf_token %}
         </form>
+    {% endif %}
+    {% if form.errors %}
+        <p><div class="alert alert-danger" role="alert">Complete los campos erroneos</div></p>
+    {% endif %}
+    {% if exist %}
+        <p><div class="alert alert-danger" role="alert">Existe una cuenta con el mismo email registrada</div></p>
     {% endif %}
 
 {% endblock %}

@@ -1,10 +1,10 @@
-{% extends "base.html" %}
-
+{% extends "base_auth_users.html" %}
+{% block title %}Activar cuenta{% endblock %}
 {% block content %}
     {% if send %}
-        <p class="info">La cuenta a sido activada.</p>
+        <p><div class="alert alert-success" role="alert">La cuenta a sido activada.</div></p>
     {% elif e_token %}
-        <p class="error">La url no se encuentra disponible.</p>
+    	<p><div class="alert alert-danger" role="alert">La url no se encuentra disponible.</div></p>
     {% endif %}
 
 {% endblock %}

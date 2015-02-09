@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.conf import settings
 from django.contrib import admin
 from auth_users import urls as auth_users_urls
 from auth_users import views as auth_users_views
@@ -17,4 +18,5 @@ urlpatterns = patterns(
     url(r'^auth/', include(auth_users_urls)),  # Other urls
     url(r'^panel/', include(panel_urls)),
     url(r'^friends/', include(friends_urls)),
+
 )

@@ -1,22 +1,23 @@
-{% extends "base.html" %}
-
+{% extends "base_auth_users.html" %}
+{% block title %}Recuperar contraseña{% endblock %}
 {% block content %}
 
-    {% if error %}
-        <p class="error">La cuenta {{ email }} no se encuentra registrada</p>
-    {% endif %}
-
     {% if send %}
-        <p class="info">Se ha enviado un mail a la cuenta {{ email }}.</p>
+        <p><div class="alert alert-success" role="alert">Se ha enviado un mail a la cuenta {{ email }}.</div></p>
     {% else %}
+        <p><h1>Encuentra tu cuenta de Weertik</h1><br/>
+            Rellena el siguiente formulario para proceder a recuperar la contraseña de tu cuenta.</p>
         <form action="" method="post">
-            <label for="email">Email:</label>
-            <input type="text" name="email" value="" id="email">
+            <p><label for="email">Correo electrónico:</label>
+            <input type="text" name="email" value="" id="email" class="form-control" placeholder="Correo electrónico" required></p>
 
-            <input type="submit" value="Recovery" />
+            <p><input type="submit" value="Recuperar" class="btn btn-info" /></p>
             <input type="hidden" name="next" value="{{ next|escape }}" />
             {% csrf_token %}
         </form>
+    {% endif %}
+    {% if error %}
+        <p><div class="alert alert-danger" role="alert">La cuenta {{ email }} no se encuentra registrada</div></p>
     {% endif %}
 
 {% endblock %}

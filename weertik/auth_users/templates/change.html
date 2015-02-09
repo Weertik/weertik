@@ -1,26 +1,25 @@
-{% extends "base.html" %}
-
+{% extends "base_auth_users.html" %}
+{% block title %}Cambiar contraseña{% endblock %}
 {% block content %}
-    {% if e_pass %}
-        <p class="error">La nueva contraseña no coincide</p>
-    {% endif %}
-
     {% if send %}
-        <p class="info">La contraseña a sido modificada.</p>
+        <p><div class="alert alert-success" role="alert">La contraseña a sido modificada.</div></p>
     {% elif e_token %}
-        <p class="error">La url no se encuentra disponible.</p>
+        <p><div class="alert alert-danger" role="alert">La url no se encuentra disponible.</div></p>
     {% else %}
-        <p>Hola, {{user.username}}</p>
+        <p><h1>Hola, {{user.username}},</h1> Rellene el siguiente formulario para modificar la contraseña de su cuenta.</p>
         <form action="" method="post">
             <label for="password">Nueva contraseña:</label>
-            <input type="password" name="password" value="" id="password">
+            <input type="password" name="password" value="" id="password" class="form-control">
             <label for="password_repeat">Repita la nueva contraseña:</label>
-            <input type="password" name="password_repeat" value="" id="password_repeat">
+            <input type="password" name="password_repeat" value="" id="password_repeat" class="form-control">
 
-            <input type="submit" value="Save password" />
+            <input type="submit" value="Guardar contraseña" class="btn btn-info" />
             <input type="hidden" name="next" value="{{ next|escape }}" />
             {% csrf_token %}
         </form>
+    {% endif %}
+    {% if e_pass %}
+        <p><div class="alert alert-danger" role="alert">La nueva contraseña no coincide</div></p>
     {% endif %}
 
 {% endblock %}
