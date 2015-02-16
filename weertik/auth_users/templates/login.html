@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="panel hidden-xs hidden-sm">
+<div class="panel hidden-xs hidden-sm shadow">
     <div class="panel-body">
     <form action="" method="post">
         <p><label for="username">Correo electrónico:</label>
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div class="panel">
+<div class="panel shadow">
     <div class="panel-heading"><h2>Registrate ahora!!</h2></div>
     <div class="panel-body">
         <form action="{% url 'signup' %}" method="post">
