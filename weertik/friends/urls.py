@@ -9,4 +9,5 @@ urlpatterns = patterns(
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', views.friendships, name='friendships'),
+    url(r'^ajax$', views.ajax_friendship, name='ajax_friendship'),
 )
