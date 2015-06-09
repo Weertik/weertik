@@ -60,18 +60,20 @@ def recovery(request):
     user = None
     try:
         user = User.objects.get(email=email)
-        token_user = Token_auth.objects.get(user=user)
+        token_user = TokenAuth.objects.get(user=user)
     except User.DoesNotExist:
         return render_to_response('recovery.html',
                                   {'error': True, 'email': email},
                                   context_instance=RequestContext(request))
-    except Token_auth.DoesNotExist:
-        token_user = Token_auth()
+    except TokenAuth.DoesNotExist:
+        token_user = TokenAuth()
         token_user.user = user
         token_user.token = uuid.uuid4().hex
         token_user.save()
 
     context = Context({'username': user.username,
+                       'name': (str(user.first_name) +
+                                ' ' + str(user.last_name)),
                        'token': token_user.token})
 
     _send_email('recovery_email',
@@ -85,9 +87,9 @@ def recovery(request):
 
 def change(request, token):
     try:
-        token_user = Token_auth.objects.get(token=token)
+        token_user = TokenAuth.objects.get(token=token)
         user = token_user.user
-    except Token_auth.DoesNotExist:
+    except TokenAuth.DoesNotExist:
         return render_to_response('change.html',
                                   {'e_token': True},
                                   context_instance=RequestContext(request))
@@ -97,9 +99,14 @@ def change(request, token):
         password_repeat = request.POST.get('password_repeat', '2')
         if password == password_repeat:
             user.set_password(password)
+            if not user.is_active:
+                user.is_active = True
             user.save()
             token_user.delete()
-            context = Context({'username': user.username})
+            context = Context(
+                {'username': user.username,
+                 'name': (str(user.first_name) +
+                          ' ' + str(user.last_name))})
 
             _send_email('change_email', context,
                         [user.email], 'Weertik - Contraseña modificada')
@@ -142,16 +149,19 @@ def signup(request):
             group.user_set.add(user)
 
         try:
-            token_user = Token_auth.objects.get(user=user)
-        except Token_auth.DoesNotExist:
-            token_user = Token_auth()
+            token_user = TokenAuth.objects.get(user=user)
+        except TokenAuth.DoesNotExist:
+            token_user = TokenAuth()
             token_user.user = user
             token_user.token = uuid.uuid4().hex
             token_user.save()
 
-        if not user.is_active:
-            context = Context({'username': user.username,
-                               'token': token_user.token})
+        if not user.is_active and not exist:
+            context = Context(
+                {'username': user.username,
+                 'name': (str(user.first_name) +
+                          ' ' + str(user.last_name)),
+                 'token': token_user.token})
             _send_email('signup_email',
                         context, [user.email],
                         'Weertik - Activa tu cuenta')
@@ -171,9 +181,9 @@ def signup(request):
 
 def active(request, token):
     try:
-        token_user = Token_auth.objects.get(token=token)
+        token_user = TokenAuth.objects.get(token=token)
         user = token_user.user
-    except Token_auth.DoesNotExist:
+    except TokenAuth.DoesNotExist:
         return render_to_response('active.html',
                                   {'e_token': True},
                                   context_instance=RequestContext(request))
@@ -181,7 +191,10 @@ def active(request, token):
     user.is_active = True
     user.save()
     token_user.delete()
-    context = Context({'username': user.username})
+    context = Context(
+        {'username': user.username,
+         'name': (str(user.first_name) +
+                  ' ' + str(user.last_name))})
     _send_email('active_email', context,
                 [user.email], 'Weertik - Cuenta activada')
     return render_to_response('active.html',

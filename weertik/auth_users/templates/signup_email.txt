@@ -1,4 +1,4 @@
-Hola {{ username }},
+Hola {{ name }},
 Bienvenido a Weertik,
 Activa tu cuenta de email pulsando en el siguiente enlace
 

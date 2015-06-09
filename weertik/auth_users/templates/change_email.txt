@@ -1,4 +1,4 @@
-Hola {{ username }},
+Hola {{ name }},
 Su contraseña a sido modificada satisfactoriamente.
 
 Atentamente el equipo de Weertik

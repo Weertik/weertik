@@ -6,7 +6,7 @@
     {% elif e_token %}
         <p><div class="alert alert-danger" role="alert">La url no se encuentra disponible.</div></p>
     {% else %}
-        <p><h1>Hola, {{user.username}},</h1> Rellene el siguiente formulario para modificar la contraseña de su cuenta.</p>
+        <p><h1>Hola, {{user.first_name}} {{user.last_name}},</h1> Rellene el siguiente formulario para modificar la contraseña de su cuenta.</p>
         <form action="" method="post">
             <label for="password">Nueva contraseña:</label>
             <input type="password" name="password" value="" id="password" class="form-control">

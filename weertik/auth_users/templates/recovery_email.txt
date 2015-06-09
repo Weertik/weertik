@@ -1,4 +1,4 @@
-Hola {{ username }},
+Hola {{ name }},
 Se ha solicitado un cambio de contraseña.
 pulsa en este link para cambiarla
 http://weertik.com/auth/change/{{ token }}

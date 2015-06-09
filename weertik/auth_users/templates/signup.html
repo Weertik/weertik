@@ -4,7 +4,7 @@
 
     {% if send %}
         <p><div class="alert alert-success" role="alert">Se ha enviado un mail de confirmación a la cuenta {{ email }}.</div></p>
-    {% else %}
+    {% elif not send %}
         <form action="" method="post">
             {% for field in form %}
                 <p>
@@ -18,12 +18,12 @@
             <input type="hidden" name="next" value="{{ next|escape }}" />
             {% csrf_token %}
         </form>
-    {% endif %}
-    {% if form.errors %}
-        <p><div class="alert alert-danger" role="alert">Complete los campos erroneos</div></p>
-    {% endif %}
-    {% if exist %}
-        <p><div class="alert alert-danger" role="alert">Existe una cuenta con el mismo email registrada</div></p>
+        {% if form.errors %}
+            <p><div class="alert alert-danger" role="alert">Complete los campos erroneos</div></p>
+        {% endif %}
+        {% if exist %}
+            <p><div class="alert alert-danger" role="alert">Existe una cuenta con el mismo email registrada</div></p>
+        {% endif %}
     {% endif %}
 
 {% endblock %}
