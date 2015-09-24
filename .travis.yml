@@ -16,7 +16,6 @@ env:
 install:
   - pip install -q Django==$DJANGO_VERSION --use-mirrors
   - pip install pep8 --use-mirrors
-  - python setup.py -q install
 before_script:
   - python manage.py syncdb --noinput
 # command to run tests
